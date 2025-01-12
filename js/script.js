@@ -53,19 +53,16 @@ const getWeatherData = async (city) => {
 
 const showMeWeatherData = async (city) => {
     const data = await getWeatherData(city);
-    const countryName = await getCountryName(data);
-    const countryPhoto = await getCountryPhoto(countryName[0].name.common);
-
-    console.log(data);
-    console.log(countryName[0].name.common);
-    console.log(countryPhoto);
-
+   
     cityInput.value = "";
 
     if (data.cod === "404") {
         errorContainer.classList.remove("hide");
         weatherContainer.classList.add("hide");
     } else {
+        const countryName = await getCountryName(data);
+        const countryPhoto = await getCountryPhoto(countryName[0].name.common);
+            
         errorContainer.classList.add("hide");
 
         document.body.style.backgroundImage = `url(${countryPhoto})`;
